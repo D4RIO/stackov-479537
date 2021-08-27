@@ -57,8 +57,17 @@ int main(void)
 
 	cin.ignore();
 
+	hojaInicial = new char**[nfilas];
+	for (int i = 0; i < nfilas; i++) {
+		hojaInicial[i] = new char*[ncolumnas];
+		for (int j = 0; j < ncolumnas; j++) {
+			hojaInicial[i][j] = new char[10];
+		}
+	}
+
 	for (int i = 0; i < nfilas; i++) {
 		for (int j = 0; j < ncolumnas; j++) {
+			cout << i << "," << j << ": ";
 			cin.getline(hojaInicial[i][j], 10);
 		}
 	}
