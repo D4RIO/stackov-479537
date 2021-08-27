@@ -16,20 +16,20 @@ void calcularHoja(char*** hojaInicial, int nfilas,int ncolumnas, int **hojaFinal
 	char *celda;
 	for(int i=0;i<nfilas;i++){
 		for(int j=0;j<ncolumnas;j++){
-			if(*(*(*(hojaInicial+i)+j)) != '='){
-				*(*(hojaFinal+i)+j)=atoi(*(*(hojaInicial+i)+j));
-				cout<<*(*(hojaFinal+i)+j)<<"\t";
+			if(hojaInicial[i][j][0] != '='){
+				hojaFinal[i][j]=atoi(hojaInicial[i][j]);
+				cout<<hojaFinal[i][j]<<"\t";
 			}
 			else{
 				suma=0;
-				celda=strtok(*(*(hojaInicial+i)+j),"+=");
+				celda=strtok(hojaInicial[i][j],"+=");
 				while(celda != NULL)
 				{
-					if((*celda>= 'A')&&(*celda<='Z')){
-						col=int(*celda)-65;
+					if((celda[0]>= 'A')&&(celda[0]<='Z')){
+						col=int(celda[0])-65;
 						celda++;
 						fil=atoi(celda)-1;
-						suma=suma+(*(*(hojaFinal+fil)+col));
+						suma=suma+(hojaFinal[fil][col]);
 						celda=strtok(NULL,"+=");
 					}
 					else{
@@ -37,8 +37,8 @@ void calcularHoja(char*** hojaInicial, int nfilas,int ncolumnas, int **hojaFinal
 						celda=strtok(NULL,"+=");
 					}
 				}
-				*(*(hojaFinal+i)+j)=suma;
-				cout<<*(*(hojaFinal+i)+j)<<"\t";
+				hojaFinal[i][j]=suma;
+				cout<<hojaFinal[i][j]<<"\t";
 			}
 		}
 		cout<<endl;
@@ -59,14 +59,14 @@ int main(void)
 
 	for (int i = 0; i < nfilas; i++) {
 		for (int j = 0; j < ncolumnas; j++) {
-			cin.getline(*(*(hojaInicial + i) + j), 10);
+			cin.getline(hojaInicial[i][j], 10);
 		}
 	}
 
 	hojaFinal = new int *[nfilas];
 	cout << "Hoja final: \n\n";
 	for (int i = 0; i < nfilas; i++) {
-		*(hojaFinal + i) = new int[ncolumnas];
+		hojaFinal[i] = new int[ncolumnas];
 	}
 	calcularHoja(hojaInicial,nfilas,ncolumnas,hojaFinal);
 }
